@@ -11753,11 +11753,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dell\\Desktop\\projekt_zaliczeniowy\\projekt_zaliczeniowy\\projekt_zaliczeniowy.csproj",
+      "projectUniqueName": "C:\\Users\\Dell\\Documents\\Projekty\\PieskieMenu\\projekt_zaliczeniowy\\projekt_zaliczeniowy.csproj",
       "projectName": "projekt_zaliczeniowy",
-      "projectPath": "C:\\Users\\Dell\\Desktop\\projekt_zaliczeniowy\\projekt_zaliczeniowy\\projekt_zaliczeniowy.csproj",
+      "projectPath": "C:\\Users\\Dell\\Documents\\Projekty\\PieskieMenu\\projekt_zaliczeniowy\\projekt_zaliczeniowy.csproj",
       "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dell\\Desktop\\projekt_zaliczeniowy\\projekt_zaliczeniowy\\obj\\",
+      "outputPath": "C:\\Users\\Dell\\Documents\\Projekty\\PieskieMenu\\projekt_zaliczeniowy\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
