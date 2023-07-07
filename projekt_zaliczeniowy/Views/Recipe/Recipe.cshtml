@@ -1,0 +1,152 @@
+﻿@model projekt_zaliczeniowy.Models.Recipe
+
+@{
+    ViewBag.Title = "Wybór Składników";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center; margin-bottom: 20px;">Wybierz ulubione składniki Twojego pupila:</h2>
+
+<style>
+    body {
+        background-color: ghostwhite;
+    }
+
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .text-danger {
+        color: red;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #8e44ad;
+        color: #fff;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    tr:nth-child(even) {
+        background-color: #e5e8f2;
+    }
+
+    .quantity-input {
+        width: 60px;
+    }
+
+    .submit-button {
+        margin-top: 10px;
+        padding: 8px 20px;
+        background-color: #8e44ad;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .submit-button:hover {
+            background-color: #6c3483;
+        }
+
+    .validation-error {
+        color: red;
+        margin-top: 5px;
+        font-size: 12px;
+    }
+</style>
+
+<div class="form-container">
+    @using (Html.BeginForm("SaveRecipe", "Recipe", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label asp-for="Name" class="form-label">Twoja nazwa przepisu:</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Białko</th>
+                    <th>Tłuszcz</th>
+                    <th>Węglowodany</th>
+                    <th>Ilość (g)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Ingredients.Count; i++)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => m.Ingredients[i].Name)</td>
+                        <td>@Html.DisplayFor(m => m.Ingredients[i].Protein)</td>
+                        <td>@Html.DisplayFor(m => m.Ingredients[i].Fat)</td>
+                        <td>@Html.DisplayFor(m => m.Ingredients[i].Carbohydrates)</td>
+                        <td>
+                            @Html.HiddenFor(m => m.Ingredients[i].Id)
+                            @Html.TextBoxFor(m => m.Ingredients[i].Quantity, new { @class = "quantity-input" })
+                            <span class="validation-error" data-valmsg-for="Ingredients[i].Quantity"></span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <input type="submit" value="Zapisz" class="submit-button" />
+    }
+</div>
+
+<script>
+    $(function () {
+        $("form").submit(function () {
+            var valid = false;
+            $("input.quantity-input").each(function () {
+                var value = $(this).val();
+                if (parseFloat(value) > 0) {
+                    valid = true;
+                    return false; // Przerywa pętlę, gdy zostanie znalezione wypełnione pole
+                }
+            });
+
+            if (!valid) {
+                alert("Przepis musi zawierać przynajmniej jeden wypełniony składnik.");
+            }
+
+            return valid;
+        });
+    });
+</script>

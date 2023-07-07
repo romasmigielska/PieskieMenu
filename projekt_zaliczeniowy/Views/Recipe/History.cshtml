@@ -1,0 +1,61 @@
+﻿@model List<projekt_zaliczeniowy.Models.Recipe>
+
+@{
+    ViewBag.Title = "Historia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-color: ghostwhite;
+    }
+
+    .recipe-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+        .recipe-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+    .recipe-image {
+        max-width: 100px;
+        margin-right: 10px;
+    }
+
+    .recipe-name {
+        flex-grow: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .recipe-link {
+        display: block;
+        padding: 10px;
+        background-color: #f2f2f2;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+    }
+
+        .recipe-link:hover {
+            background-color: #e6e6e6;
+        }
+</style>
+
+<h2>Twoje przepisy</h2>
+
+<ul class="recipe-list">
+    @foreach (var recipe in Model)
+    {
+        <li>
+            <img src="/images/ikona.png" alt="Karma" class="recipe-image" />
+            <div class="recipe-name">@Html.ActionLink(recipe.Name, "RecipeShow", new { id = recipe.Id }, new { @class = "recipe-link" })</div>
+        </li>
+    }
+</ul>

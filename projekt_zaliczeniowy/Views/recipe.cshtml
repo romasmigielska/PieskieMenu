@@ -1,0 +1,36 @@
+﻿@model List<projekt_zaliczeniowy.Models.Ingredient>
+
+@{
+    ViewBag.Title = "Wybór Składników";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Wybór Składników</h2>
+
+@using (Html.BeginForm("ZapiszPrzepis", "Przepis", FormMethod.Post))
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Opis</th>
+                <th>Ilość (g)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => m[i].Name)</td>
+                    <td>@Html.DisplayFor(m => m[i].Description)</td>
+                    <td>
+                        @Html.HiddenFor(m => m[i].Id)
+                        @Html.TextBoxFor(m => m[i].Quantity, new { @class = "quantity-input" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <input type="submit" value="Zapisz" />
+}
